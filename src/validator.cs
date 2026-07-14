@@ -1,10 +1,9 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace drones
 {
     public interface IValidate
     {
         bool Validate(var variable);
+        bool Validate(Drone drone);
         bool Validate(var variable, List<string> valids);
     }
     class DroneValidator : IValidate
@@ -12,17 +11,17 @@ namespace drones
         List<string> validModels = new {"Falcon-X", "Raven-M", "SkyEye-2","CargoBee", "Storm-4", "Scout-Lite"};
         List<string> validCategories = new {"Recon", "Patrol", "Mapping","Delivery", "Search"};
         List<string> validLocations = new {"North", "South", "Central","East", "West"};
-        IValidate idValidate = new();
-        IValidate serialNumberValidator = new();
-        IValidate modelValidator = new();
-        IValidate categoryValidator = new();
-        IValidate baseLocationValidator = new();
-        IValidate flightHoursValidator = new();
-        IValidate batteryHealthValidator = new();
-        IValidate maxRangeValidator = new();
-        IValidate missionsCompletedValidator = new();
-        IValidate statusValidator = new();
-        public bool Validate()
+        IdValidator idValidate = new();
+        SerialNumberValidator serialNumberValidator = new();
+        ModelValidator modelValidator = new();
+        CategoryValidator categoryValidator = new();
+        BaseLocationValidator baseLocationValidator = new();
+        FlightHoursValidator flightHoursValidator = new();
+        BatteryHealthValidator batteryHealthValidator = new();
+        MaxRangeValidator maxRangeValidator = new();
+        MissionsCompletedValidator missionsCompletedValidator = new();
+        StatusValidator statusValidator = new();
+        public bool Validate(Drone drone)
         {
             
         }
@@ -70,30 +69,30 @@ namespace drones
     }
     class FlightHoursValidator : IValidate
     {
-        public bool Validate()
+        public bool Validate(double hours)
         {
-            
+            return (hours > 3000 && hours < 0);
         }
     }
     class BatteryHealthValidator : IValidate
     {
-        public bool Validate()
+        public bool Validate(int percentage)
         {
-            
+            return (percentage > 100 && percentage < 0);
         }
     }
     class MaxRangeValidator : IValidate
     {
-        public bool Validate()
+        public bool Validate(double km)
         {
-            
+            return (km > 150 && km < 0);
         }
     }
     class MissionsCompletedValidator : IValidate
     {
-        public bool Validate()
+        public bool Validate(int amount)
         {
-            
+            return (amount > 5000 && amount < 0);
         }
     }
     class StatusValidator : IValidate

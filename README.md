@@ -3,8 +3,18 @@ Overview
 
 This project processes raw drone data from an external sensor system. It validates the data, creates a clean dataset, performs statistical analysis using LINQ, and generates a summary report.
 
-The system is not a CRUD application. It performs a one-time data processing workflow.
-
+class Drone
+    int Id 
+    string SerialNumber 
+    string Model
+    string Category 
+    string BaseLocation 
+    double FlightHours
+    int BatteryHealth 
+    double MaxRangeKm 
+    int MissionsCompleted
+    string Status 
+    
 
 Each record is validated for:
 
