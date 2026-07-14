@@ -1,6 +1,6 @@
 namespace drones
 {
-    class InvalidId :Exception;
+    class InvalidId : Exception;
     class InvalidSerialNumber;
     class InvalidModel;
     class InvalidCategory;
