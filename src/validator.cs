@@ -39,13 +39,12 @@ namespace drones
     {
         public bool Validate(string serialNumber)
         {
-            bool valid = true;
-            if (serialNumber.Count() != 7) {valid = false;}
+            if (serialNumber.Count() != 7) {return false;}
             string s1 = serialNumber.Substring(0, 4);
             string s2 = serialNumber.Substring(4);
-            if (s1 != "DR-") {valid = false;}
-            if (!int.TryParse(s2, out int _)) {valid = false;}
-            return valid;
+            if (s1 != "DR-") {return false;}
+            if (!int.TryParse(s2, out int _)) {return false;}
+            return true;
         }
     }
     class ModelValidator : IValidate
@@ -64,9 +63,9 @@ namespace drones
     }
     class BaseLocationValidator : IValidate
     {
-        public bool Validate()
+        public bool Validate(string location, List<string> locations)
         {
-            
+            return locations.Contains(location);
         }
     }
     class FlightHoursValidator : IValidate
