@@ -2,16 +2,16 @@ namespace drones
 {
     public class Drone
     {
-        public int Id { get; }
-        public string SerialNumber { get; }
-        public string Model { get; }
-        public string Category { get; }
-        public string BaseLocation { get; }
-        public double FlightHours { get; }
-        public int BatteryHealth { get; }
-        public double MaxRangeKm { get; }
-        public int MissionsCompleted { get; }
-        public string Status { get; }
+        public int Id { get; set;}
+        public required string SerialNumber { get; set;}
+        public required string Model { get; set;}
+        public required string Category { get; set;}
+        public required string BaseLocation { get; set;}
+        public required double FlightHours { get; set;}
+        public required int BatteryHealth { get; set;}
+        public required double MaxRangeKm { get; set;}
+        public required int MissionsCompleted { get; set;}
+        public required string Status { get; set;}
     }
     public interface IValidate<T>
     {
