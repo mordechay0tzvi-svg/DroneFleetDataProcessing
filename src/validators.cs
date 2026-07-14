@@ -1,10 +1,23 @@
 namespace drones
 {
+    public class Drone
+    {
+        public int Id { get; }
+        public string SerialNumber { get; }
+        public string Model { get; }
+        public string Category { get; }
+        public string BaseLocation { get; }
+        public double FlightHours { get; }
+        public int BatteryHealth { get; }
+        public double MaxRangeKm { get; }
+        public int MissionsCompleted { get; }
+        public string Status { get; }
+    }
     public interface IValidate
     {
         bool Validate(var variable);
         bool Validate(Drone drone);
-        bool Validate(var variable, List<string> valids);
+        bool Validate(string variable, List<string> valids);
     }
     class DroneValidator : IValidate
     {
@@ -24,7 +37,18 @@ namespace drones
         StatusValidator statusValidator = new();
         public bool Validate(Drone drone)
         {
-            
+            bool valid = true;
+            valid &= idValidate.Validate(drone.Id);
+            valid &= serialNumberValidator.Validate(drone.SerialNumber);
+            valid &= modelValidator.Validate(drone.Model, validModels);
+            valid &= categoryValidator.Validate(drone.Category, validCategories);
+            valid &= baseLocationValidator.Validate(drone.BaseLocation, validLocations);
+            valid &= flightHoursValidator.Validate(drone.FlightHours);
+            valid &= batteryHealthValidator.Validate(drone.BatteryHealth);
+            valid &= maxRangeValidator.Validate(drone.MaxRangeKm);
+            valid &= missionsCompletedValidator.Validate(drone.MissionsCompleted);
+            valid &= statusValidator.Validate(drone.Status, validStatus);
+            return valid;
         }
     }
     class IdValidator : IValidate
@@ -34,7 +58,6 @@ namespace drones
             return (id > 0);
         }
     }
-    
     class SerialNumberValidator : IValidate
     {
         public bool Validate(string serialNumber)
