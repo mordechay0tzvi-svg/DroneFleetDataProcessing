@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\DroneFleetDataProcessing",
+    "\\DroneFleetDataProcessing\\src"
   ],
-  "SelectedNode": "\\src\\validator.cs",
+  "SelectedNode": "\\DroneFleetDataProcessing\\src\\SpecificValidators.cs",
   "PreviewInSolutionExplorer": false
 }
