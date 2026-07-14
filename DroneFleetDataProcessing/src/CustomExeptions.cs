@@ -10,4 +10,7 @@ namespace drones
     class InvalidMaxRangeKm : Exception;
     class InvalidMissionsCompleted : Exception;
     class InvalidStatus : Exception;
+    class NoValidDrones : Exception;
+    class EmptyJsonFile : Exception;
+    class CorruptJsonFile : Exception;
 }

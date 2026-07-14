@@ -1,4 +1,5 @@
-﻿namespace drones
+﻿using drones;
+namespace mainprogram
 {
     class Program
     {
