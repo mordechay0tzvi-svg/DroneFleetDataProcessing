@@ -13,11 +13,11 @@ namespace drones
         public int MissionsCompleted { get; }
         public string Status { get; }
     }
-    public interface IValidate
+    public interface IValidate<T>
     {
-        bool Validate(object value);
+        bool Validate(T check);
     }
-    class DroneValidator : IValidate
+    class DroneValidator
     {
         IdValidator idValidate = new();
         SerialNumberValidator serialNumberValidator = new();
@@ -45,83 +45,83 @@ namespace drones
             return valid;
         }
     }
-    class IdValidator : IValidate
+    class IdValidator : IValidate<int>
     {
-        public bool Validate(int id)
+        public bool Validate(int check)
         {
-            return (id > 0);
+            return (check > 0);
         }
     }
-    class SerialNumberValidator : IValidate
+    class SerialNumberValidator : IValidate<string>
     {
-        public bool Validate(string serialNumber)
+        public bool Validate(string check)
         {
-            if (serialNumber.Count() != 7) {return false;}
-            string s1 = serialNumber.Substring(0, 4);
-            string s2 = serialNumber.Substring(4);
+            if (check.Count() != 7) {return false;}
+            string s1 = check.Substring(0, 4);
+            string s2 = check.Substring(4);
             if (s1 != "DR-") {return false;}
             if (!int.TryParse(s2, out int _)) {return false;}
             return true;
         }
     }
-    class ModelValidator : IValidate
+    class ModelValidator : IValidate<string>
     {
         private readonly List<string> validModels = new {"Falcon-X", "Raven-M", "SkyEye-2", "CargoBee", "Storm-4", "Scout-Lite"};
-        public bool Validate(string model)
+        public bool Validate(string check)
         {
-            return validModels.Contains(model);
+            return validModels.Contains(check);
         }
     }
-    class CategoryValidator : IValidate
+    class CategoryValidator : IValidate<string>
     {
         private readonly List<string> validCategories = new {"Recon", "Patrol", "Mapping", "Delivery", "Search"};
-        public bool Validate(string category)
+        public bool Validate(string check)
         {
-            return validCategories.Contains(category);
+            return validCategories.Contains(check);
         }
     }
-    class BaseLocationValidator : IValidate
+    class BaseLocationValidator : IValidate<string>
     {
         private readonly List<string> validLocations = new {"North", "South", "Central", "East", "West"};
-        public bool Validate(string location)
+        public bool Validate(string check)
         {
-            return validLocations.Contains(location);
+            return validLocations.Contains(check);
         }
     }
-    class FlightHoursValidator : IValidate
+    class FlightHoursValidator : IValidate<double>
     {
-        public bool Validate(double hours)
+        public bool Validate(double check)
         {
-            return (hours > 3000 && hours < 0);
+            return (check > 3000 && check < 0);
         }
     }
-    class BatteryHealthValidator : IValidate
+    class BatteryHealthValidator : IValidate<int>
     {
-        public bool Validate(int percentage)
+        public bool Validate(int check)
         {
-            return (percentage > 100 && percentage < 0);
+            return (check > 100 && check < 0);
         }
     }
-    class MaxRangeValidator : IValidate
+    class MaxRangeValidator : IValidate<double>
     {
-        public bool Validate(double km)
+        public bool Validate(double check)
         {
-            return (km > 150 && km < 0);
+            return (check > 150 && check < 0);
         }
     }
-    class MissionsCompletedValidator : IValidate
+    class MissionsCompletedValidator : IValidate<int>
     {
-        public bool Validate(int amount)
+        public bool Validate(int check)
         {
-            return (amount > 5000 && amount < 0);
+            return (check > 5000 && check < 0);
         }
     }
-    class StatusValidator : IValidate
+    class StatusValidator : IValidate<string>
     {
         private readonly List<string> validStatus = new {"Operational", "Maintenance", "Grounded", "Training"};
-        public bool Validate(string status)
+        public bool Validate(string check)
         {
-            return validStatus.Contains(status);
+            return validStatus.Contains(check);
         }
     }
 }

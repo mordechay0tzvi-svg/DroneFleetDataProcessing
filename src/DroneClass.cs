@@ -15,6 +15,6 @@ namespace drones
     }
     public interface IValidate<T>
     {
-        bool Validate(T value);
+        bool Validate(T check);
     }
 }

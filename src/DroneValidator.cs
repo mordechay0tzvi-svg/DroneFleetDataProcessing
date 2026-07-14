@@ -1,6 +1,6 @@
 namespace drones
 {
-    class DroneValidator : IValidate
+    class DroneValidator
     {
         IdValidator idValidate = new();
         SerialNumberValidator serialNumberValidator = new();
