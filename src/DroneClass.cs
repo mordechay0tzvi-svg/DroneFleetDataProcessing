@@ -13,4 +13,8 @@ namespace drones
         public int MissionsCompleted { get; }
         public string Status { get; }
     }
+    public interface IValidate<T>
+    {
+        bool Validate(T value);
+    }
 }
