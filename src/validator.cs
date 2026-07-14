@@ -1,11 +1,17 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace drones
 {
     public interface IValidate
     {
         bool Validate(var variable);
+        bool Validate(var variable, List<string> valids);
     }
     class DroneValidator : IValidate
     {
+        List<string> validModels = new {"Falcon-X", "Raven-M", "SkyEye-2","CargoBee", "Storm-4", "Scout-Lite"};
+        List<string> validCategories = new {"Recon", "Patrol", "Mapping","Delivery", "Search"};
+        List<string> validLocations = new {"North", "South", "Central","East", "West"};
         IValidate idValidate = new();
         IValidate serialNumberValidator = new();
         IValidate modelValidator = new();
@@ -18,7 +24,7 @@ namespace drones
         IValidate statusValidator = new();
         public bool Validate()
         {
-            return True;
+            
         }
     }
     class IdValidator : IValidate
@@ -44,16 +50,16 @@ namespace drones
     }
     class ModelValidator : IValidate
     {
-        public bool Validate()
+        public bool Validate(string model, List<string> models)
         {
-            
+            return models.Contains(model);
         }
     }
     class CategoryValidator : IValidate
     {
-        public bool Validate()
+        public bool Validate(string category, List<string> categories)
         {
-            
+            return categories.Contains(category);
         }
     }
     class BaseLocationValidator : IValidate
