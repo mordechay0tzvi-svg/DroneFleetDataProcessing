@@ -13,9 +13,9 @@ namespace drones
         public int MissionsCompleted { get; }
         public string Status { get; }
     }
-    public interface IValidate<T>
+    public interface IValidate
     {
-        bool Validate(T value);
+        bool Validate(object value);
     }
     class DroneValidator : IValidate
     {
@@ -45,14 +45,14 @@ namespace drones
             return valid;
         }
     }
-    class IdValidator : IValidate<int>
+    class IdValidator : IValidate
     {
         public bool Validate(int id)
         {
             return (id > 0);
         }
     }
-    class SerialNumberValidator : IValidate<string>
+    class SerialNumberValidator : IValidate
     {
         public bool Validate(string serialNumber)
         {
@@ -64,7 +64,7 @@ namespace drones
             return true;
         }
     }
-    class ModelValidator : IValidate<string>
+    class ModelValidator : IValidate
     {
         private readonly List<string> validModels = new {"Falcon-X", "Raven-M", "SkyEye-2", "CargoBee", "Storm-4", "Scout-Lite"};
         public bool Validate(string model)
@@ -72,55 +72,54 @@ namespace drones
             return validModels.Contains(model);
         }
     }
-    class CategoryValidator : IValidate<string>
+    class CategoryValidator : IValidate
     {
         private readonly List<string> validCategories = new {"Recon", "Patrol", "Mapping", "Delivery", "Search"};
-        public bool Validate(string category, List<string> categories)
+        public bool Validate(string category)
         {
             return validCategories.Contains(category);
         }
     }
-    class BaseLocationValidator : IValidate<string>
+    class BaseLocationValidator : IValidate
     {
-        List<string> validLocations = new {"North", "South", "Central", "East", "West"};
-        private readonly 
-        public bool Validate(string location, List<string> locations)
+        private readonly List<string> validLocations = new {"North", "South", "Central", "East", "West"};
+        public bool Validate(string location)
         {
             return validLocations.Contains(location);
         }
     }
-    class FlightHoursValidator : IValidate<double>
+    class FlightHoursValidator : IValidate
     {
         public bool Validate(double hours)
         {
             return (hours > 3000 && hours < 0);
         }
     }
-    class BatteryHealthValidator : IValidate<int>
+    class BatteryHealthValidator : IValidate
     {
         public bool Validate(int percentage)
         {
             return (percentage > 100 && percentage < 0);
         }
     }
-    class MaxRangeValidator : IValidate<double>
+    class MaxRangeValidator : IValidate
     {
         public bool Validate(double km)
         {
             return (km > 150 && km < 0);
         }
     }
-    class MissionsCompletedValidator : IValidate<int>
+    class MissionsCompletedValidator : IValidate
     {
         public bool Validate(int amount)
         {
             return (amount > 5000 && amount < 0);
         }
     }
-    class StatusValidator : IValidate<string>
+    class StatusValidator : IValidate
     {
         private readonly List<string> validStatus = new {"Operational", "Maintenance", "Grounded", "Training"};
-        public bool Validate(string status, List<string> statusList)
+        public bool Validate(string status)
         {
             return validStatus.Contains(status);
         }
