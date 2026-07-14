@@ -8,9 +8,10 @@ namespace drones
     }
     class DroneValidator : IValidate
     {
-        List<string> validModels = new {"Falcon-X", "Raven-M", "SkyEye-2","CargoBee", "Storm-4", "Scout-Lite"};
-        List<string> validCategories = new {"Recon", "Patrol", "Mapping","Delivery", "Search"};
-        List<string> validLocations = new {"North", "South", "Central","East", "West"};
+        List<string> validModels = new {"Falcon-X", "Raven-M", "SkyEye-2", "CargoBee", "Storm-4", "Scout-Lite"};
+        List<string> validCategories = new {"Recon", "Patrol", "Mapping", "Delivery", "Search"};
+        List<string> validLocations = new {"North", "South", "Central", "East", "West"};
+        List<string> validStatus = new {"Operational", "Maintenance", "Grounded", "Training"};
         IdValidator idValidate = new();
         SerialNumberValidator serialNumberValidator = new();
         ModelValidator modelValidator = new();
@@ -97,9 +98,9 @@ namespace drones
     }
     class StatusValidator : IValidate
     {
-        public bool Validate()
+        public bool Validate(string status, List<string> statusList)
         {
-            
+            return statusList.Contains(status);
         }
     }
 }
