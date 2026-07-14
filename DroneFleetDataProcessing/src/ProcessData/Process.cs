@@ -13,11 +13,25 @@ namespace DroneFleetDataProcessing.src.ProcessData
             string folderPath = Path.Combine("input","raw", "drones_raw.json");
             string loadJson = File.ReadAllText(folderPath);
             //Console.WriteLine(string.Join(", ",loadJson));
-
-            var options = new JsonSerializerOptions(); 
-            
+            var options = new JsonSerializerOptions();       
             List<Drone> drones = JsonSerializer.Deserialize<List<Drone>>(loadJson) ?? new();
             return drones;
         }
+
+        static static List<Drone> FilterDrones(List<Drone> allDrones)
+        {
+            List<Drone>  goodDrones = new();
+            DroneValidator droneValidator = new DroneValidator();
+            foreach (Drone drone in allDrones)
+            {
+                if (droneValidator.Validate(drone))
+                {
+                    goodDrones.Add(drone);
+                }
+            }
+            return goodDrones;
+        }
+
+
     }
 }
