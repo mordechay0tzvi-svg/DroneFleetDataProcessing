@@ -2,7 +2,7 @@ namespace drones
 {
     class InvalidId : Exception;
     class InvalidSerialNumber : Exception;
-    class InvalidModel : Exception
+    class InvalidModel : Exception;
     class InvalidCategory : Exception;
     class InvalidBaseLocation : Exception;
     class InvalidFlightHours : Exception;
