@@ -8,5 +8,7 @@ class Program
     {
        Process s  = new();
         s.InitialProcess();
+        //Console.WriteLine(r[0].id);
+
     }
 }

@@ -14,16 +14,21 @@ namespace DroneFleetDataProcessing.src.ProcessData
         {
             try
             {
-                string folderPath = Path.Combine("input", "raw", "drones_raw.json");
-                
-                string loadJson = File.ReadAllText(folderPath);
-              
-                var options = new JsonSerializerOptions();
-                
-                List<Drone>? drones = JsonSerializer.Deserialize<List<Drone>>(loadJson) ;
-                if (drones == null) throw  new NullReferenceException("The JSON content was successfully read but resolved to null.");
-                Console.WriteLine("D");
+                //string folderPath = Path.Combine("input", "raw", "drones_raw.json");
 
+                //string loadJson = File.ReadAllText(folderPath);
+
+                //var options = new JsonSerializerOptions();
+
+                //List<Drone>? drones = JsonSerializer.Deserialize<List<Drone>>(loadJson);
+                //if (drones == null) throw new NullReferenceException("The JSON content was successfully read but resolved to null.");
+                //return drones;
+                string folderPath = Path.Combine("input", "test_scenarios", "drones_empty.json");
+                string loadJson = File.ReadAllText(folderPath);
+                var options = new JsonSerializerOptions();
+
+                List<Drone>? drones = JsonSerializer.Deserialize<List<Drone>>(loadJson);
+                if (drones == null) throw new NullReferenceException("The JSON content was successfully read but resolved to null.");
                 return drones;
             }
             catch (FileNotFoundException) 
