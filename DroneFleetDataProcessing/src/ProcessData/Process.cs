@@ -8,7 +8,10 @@ namespace DroneFleetDataProcessing.src.ProcessData
 {
     class Process
     {
-        static List<Drone> InitialProcess()
+        CreateFiles cr = new CreateFiles();
+        public string reportAnalysisFilePath = cr.Create()[0];
+        public string cleanDronesFilePath = cr.Create()[1];
+        public static List<Drone> InitialProcess()
         {
             string folderPath = Path.Combine("input","raw", "drones_raw.json");
             string loadJson = File.ReadAllText(folderPath);
@@ -18,38 +21,7 @@ namespace DroneFleetDataProcessing.src.ProcessData
             return drones;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        static static List<Drone> FilterDrones()
+        public static List<Drone> FilterDrones()
         {
             List<Drone>  goodDrones = new();
             DroneValidator droneValidator = new DroneValidator();
@@ -62,5 +34,6 @@ namespace DroneFleetDataProcessing.src.ProcessData
             }
             return goodDrones;
         }
-    }
+
+        
  }

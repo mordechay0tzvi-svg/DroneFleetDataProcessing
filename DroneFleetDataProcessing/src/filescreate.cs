@@ -4,7 +4,7 @@ namespace drones
 {
     class CreateFiles
     {
-        static List<string> Create()
+        public static List<string> Create()
         {
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string parentFolder = Path.GetFullPath(Path.Combine(basePath, @"..\..\.."));
@@ -13,6 +13,7 @@ namespace drones
             string filePath2 = Path.Combine(targetFolder, "clean_drones.json");
             File.Create(filePath1).Dispose();
             File.Create(filePath2).Dispose();
+            File.WriteAllText(filePath1, "DRONE FLEET ANALYSIS REPORT");
             return new List<string> { filePath1, filePath2 };
         }
     }
