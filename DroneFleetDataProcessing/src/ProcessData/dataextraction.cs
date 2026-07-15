@@ -2,13 +2,19 @@ using System.Data;
 
 namespace drones
 {
-    class AllData(string cleanDronesFilePath, string reportAnalysisFilePath)
+    class AllData()
     {
-        Process prc = new Process();
-        string cleanDronesFilePath = cleanDronesFilePath;
-        string reportAnalysisFilePath = reportAnalysisFilePath;
-        List<Drone> all = prc.InitialProcess();
-        List<Drone> good = prc.FilterDrones();
+        public string cleanDronesFilePath;
+        public string reportAnalysisFilePath;
+        public List<Drone> all;
+        public List<Drone> good;
+        public AllData(string cleanDrones, string reportAnalysis, List<Drone> allDrones, List<Drone> goodDrones)
+        {
+            cleanDronesFilePath = cleanDrones;
+            reportAnalysisFilePath = reportAnalysis;
+            all = allDrones;
+            good = goodDrones;
+        }
         public void ShowDroneFile()
         {
             File.WriteAllText(cleanDronesFilePath, JsonSerializer.Serialize<List<Drone>>(prc.FilterDrones()));
