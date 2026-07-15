@@ -1,4 +1,4 @@
-namespace drones
+ namespace drones
 {
     class DroneValidator
     {
@@ -25,6 +25,7 @@ namespace drones
             valid &= maxRangeValidator.Validate(drone.maxRangeKm);
             valid &= missionsCompletedValidator.Validate(drone.missionsCompleted);
             valid &= statusValidator.Validate(drone.status);
+            valid &= !(drone.status == "Operational" && drone.batteryHealth < 20);
             return valid;
         }
     }
