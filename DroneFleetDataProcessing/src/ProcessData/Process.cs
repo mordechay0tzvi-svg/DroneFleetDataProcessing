@@ -18,11 +18,42 @@ namespace DroneFleetDataProcessing.src.ProcessData
             return drones;
         }
 
-        static static List<Drone> FilterDrones(List<Drone> allDrones)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        static static List<Drone> FilterDrones()
         {
             List<Drone>  goodDrones = new();
             DroneValidator droneValidator = new DroneValidator();
-            foreach (Drone drone in allDrones)
+            foreach (Drone drone in InitialProcess())
             {
                 if (droneValidator.Validate(drone))
                 {
@@ -31,7 +62,5 @@ namespace DroneFleetDataProcessing.src.ProcessData
             }
             return goodDrones;
         }
-
-
     }
-}
+ }
