@@ -1,8 +1,8 @@
 using System.Data;
-
+using System.Text.Json;
 namespace drones
 {
-    class AllData()
+    class AllData
     {
         public string cleanDronesFilePath;
         public string reportAnalysisFilePath;
@@ -17,7 +17,7 @@ namespace drones
         }
         public void ShowDroneFile()
         {
-            File.WriteAllText(cleanDronesFilePath, JsonSerializer.Serialize<List<Drone>>(prc.FilterDrones()));
+            File.WriteAllText(cleanDronesFilePath, JsonSerializer.Serialize<List<Drone>>(good));
         }
         public void ProcessingSummary()
         {
@@ -42,7 +42,7 @@ namespace drones
             var top5Hours = good.OrderByDescending(d => d.flightHours).Select(d => new { serialNumber = d.serialNumber, model = d.model, hours = d.flightHours }).Take(5);
             foreach (var drone in top5Hours)
             {
-                File.AppendText(reportAnalysisFilePath, $"{drone.serialNumber} | {drone.model} | {drone.hours}\n");
+                File.AppendAllText(reportAnalysisFilePath, $"{drone.serialNumber} | {drone.model} | {drone.hours}\n");
             }
         }
         public void AvailableDroneModels()
@@ -60,7 +60,7 @@ namespace drones
             var basesAmount = good.GroupBy(d => d.base_location).Select(b => new { basel = b.Key, c = b.Count() });
             foreach (var lbase in basesAmount)
             {
-                File.AppendAllText(prc.reportAnalysisFilePath, $"{lbase.basel}: {lbase.c}\n");
+                File.AppendAllText(reportAnalysisFilePath, $"{lbase.basel}: {lbase.c}\n");
             }
         }
         public void AvgBattery()
