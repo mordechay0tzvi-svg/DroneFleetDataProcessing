@@ -1,11 +1,12 @@
 ﻿using drones;
-namespace mainprogram
-{
-    class Program
-    {
-        static void Main()
-        {
+using DroneFleetDataProcessing.src.ProcessData;
+namespace mainprogram;
 
-        }
+class Program
+{
+    static void Main()
+    {
+       Process s  = new();
+        s.InitialProcess();
     }
 }
