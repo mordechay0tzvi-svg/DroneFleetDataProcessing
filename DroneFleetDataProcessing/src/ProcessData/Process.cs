@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Xml;
 
 
-namespace DroneFleetDataProcessing.src.ProcessData
+namespace drones
 {
     class Process
     {

@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using drones; 
-using DroneFleetDataProcessing.src.Process
-namespace mainprogram
+namespace drones
 {
     class Program
-    {   
+    { 
+        
     }
 }
