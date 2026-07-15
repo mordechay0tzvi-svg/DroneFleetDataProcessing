@@ -4,7 +4,7 @@ namespace drones
 {
     class CreateFiles
     {
-        public static List<string> Create()
+        public List<string> Create()
         {
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string parentFolder = Path.GetFullPath(Path.Combine(basePath, @"..\..\.."));
