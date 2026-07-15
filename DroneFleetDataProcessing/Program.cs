@@ -1,14 +1,9 @@
-﻿using drones;
-using DroneFleetDataProcessing.src.ProcessData;
-namespace mainprogram;
-
-class Program
+﻿using System.Diagnostics;
+using drones; 
+using DroneFleetDataProcessing.src.Process
+namespace mainprogram
 {
-    static void Main()
-    {
-       Process s  = new();
-        s.InitialProcess();
-        //Console.WriteLine(r[0].id);
-
+    class Program
+    {   
     }
 }
