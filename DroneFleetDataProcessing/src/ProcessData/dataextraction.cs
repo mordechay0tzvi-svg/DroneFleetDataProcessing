@@ -93,6 +93,7 @@ namespace drones
 
         public void GetReport()
         {
+            ShowDroneFile();
             ProcessingSummary();
             NoneOperationalDrones();
             Top5Hours();

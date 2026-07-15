@@ -16,7 +16,7 @@ namespace drones
             try
             {             
                 //List<Drone>? drones = new List<Drone>();
-                string folderPath = Path.Combine("input", "test_scenarios", fileName);
+                string folderPath = Path.Combine("input", "raw", fileName);
                 string loadJson = File.ReadAllText(folderPath);
                 
                 var options = new JsonSerializerOptions
