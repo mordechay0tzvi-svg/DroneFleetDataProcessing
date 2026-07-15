@@ -116,7 +116,6 @@ namespace drones
                 bool isValidReport = valdator.Validate(drone);
                 if (isValidReport && !(ides.Contains(drone.id)) && !(serials.Contains(drone.serialNumber))) { validDrones.Add(drone); ides.Add(drone.id); serials.Add(drone.serialNumber); }
             }
-            Console.WriteLine(validDrones.Count);
             return validDrones;
         }
     }
