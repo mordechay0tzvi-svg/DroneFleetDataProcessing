@@ -13,7 +13,8 @@ namespace drones
             string path = pathsFiles[1];
             Process f = new Process();
             
-            f.InitialProcess("drones_null.json");
+          List<Drone>? d  = f.InitialProcess("drones_all_invalid.json");
+            f.FilterDrones(d);
         }
     }
 }
