@@ -10,14 +10,14 @@ using System.Xml;
 
 namespace drones
 {
-    class ProcessJsonFile : Iloaddata 
+    class ProcessJsonFile : IloadData<string>
     {
-         public List<Drone>? InitialProcess(string data)
+         public List<Drone>? InitialProcess(string filename)
         {
             try
             {             
                 
-                string folderPath = Path.Combine("input", "raw", data);
+                string folderPath = Path.Combine("input", "raw", filename);
                 string loadJson = File.ReadAllText(folderPath);
                 
                 var options = new JsonSerializerOptions

@@ -18,17 +18,13 @@ namespace drones
            : base(message) { }
     }
 
-    public class MalformedJsonException : Exception
+    class MalformedJsonException : Exception
     {
         public MalformedJsonException(string message)
             : base(message) { }
     }
 
-    public class drones_empty : Exception
-    {
-          
-    }
-
+   
 
     class DronsInvalidException : Exception
     {

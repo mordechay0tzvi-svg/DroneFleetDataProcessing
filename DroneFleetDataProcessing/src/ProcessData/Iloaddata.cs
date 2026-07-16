@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DroneFleetDataProcessing.src.ProcessData
 {
-    interface Iloaddata
+    interface IloadData<T>
     {
-        public List<Drone>? InitialProcess(string data);
+        public List<Drone>? InitialProcess(T data);
         
     }
 }
