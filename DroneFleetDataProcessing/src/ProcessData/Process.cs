@@ -15,8 +15,8 @@ namespace drones
         {
             try
             {             
-                //List<Drone>? drones = new List<Drone>();
-                string folderPath = Path.Combine("input", "test_scenarios", fileName);
+                
+                string folderPath = Path.Combine("input", "raw", fileName);
                 string loadJson = File.ReadAllText(folderPath);
                 
                 var options = new JsonSerializerOptions
@@ -24,32 +24,16 @@ namespace drones
                     PropertyNameCaseInsensitive = true
                 };
                 
-                if (string.IsNullOrWhiteSpace(loadJson)) throw new NullReferenceException("The JSON content was successfully read but resolved to null.");
-                
-
                 if (loadJson.Length == 0) 
                 {
                     throw new EmptyJsonFile("Error: EmptyJsonFile - the file is empty ");
-                }
+                }    
                 
-                //foreach (string dronej in loadJson)
-                //{
-                //    try
-                //    {
-                       
-                //        drones.Add(drone);
-
-                //    }
-                //    catch (JsonException )
-                //    { continue; }
-                    
-                //}
-
                 List<Drone>? drones = JsonSerializer.Deserialize<List<Drone>>(loadJson, options);
-                //if (drones.Count == 0) throw new DronsInvalidException("The JSON content was successfully read but all drons are invalid.");
                 if (drones == null) throw new NullReferenceException("The JSON content was successfully read but resolved to null.");
                 return drones;
             }
+            
             catch (EmptyJsonFile ex)
             {
                 Console.WriteLine(ex.Message);
@@ -78,33 +62,17 @@ namespace drones
             }
 
             catch (JsonException ex)
-            {
-                string errorMsg;
-
-                // אם הבעיה היא בטיפוס הנתונים (יש נתיב ספציפי לשדה הבעייתי)
-                if (!string.IsNullOrEmpty(ex.Path))
-                {
-                    errorMsg = $"JSON data type mismatch at property '{ex.Path}.";
-                }
-                // אם הבעיה היא בעיית תחביר (פסיק חסר, סוגרייוכו זקוק לשינוי לגבי שגיאה אם כול האובייקטים שגואיים ולא רק אחד ')
-                else
-                {
-                    errorMsg = $"JSON syntax - error (malformed) at line {ex.LineNumber}, position {ex.BytePositionInLine}.";
-                }
-
-                Console.WriteLine($"Error: {errorMsg}");
+            {    
+            Console.WriteLine($"Error: MalformedError {ex.Message}");
                 return null;
             }
 
-            catch (DronsInvalidException ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
+            
+           
 
         }
 
-        public List<Drone>? FilterDrones(List<Drone> drones)
+        public List<Drone> FilterDrones(List<Drone> drones)
         {
             DroneValidator valdator = new DroneValidator();
             List<Drone> validDrones = new List<Drone>();
@@ -116,8 +84,25 @@ namespace drones
                 bool isValidReport = valdator.Validate(drone);
                 if (isValidReport && !(ides.Contains(drone.id)) && !(serials.Contains(drone.serialNumber))) { validDrones.Add(drone); ides.Add(drone.id); serials.Add(drone.serialNumber); }
             }
-            Console.WriteLine(validDrones.Count);
+            
+           
+                Console.WriteLine(validDrones.Count);
             return validDrones;
+        }
+
+        public bool isAllDronesInvalid (List<Drone> validDrones)
+        {
+            try
+            {
+                if (validDrones.Count == 0) throw new DronsInvalidException("Error: DronsInvalidException - all drones are invalid");
+                return true;
+            }
+            catch (DronsInvalidException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
         }
     }
 }
