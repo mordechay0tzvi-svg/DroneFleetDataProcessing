@@ -12,7 +12,6 @@ namespace drones
     class InvalidMaxRangeKm : Exception;
     class InvalidMissionsCompleted : Exception;
     class InvalidStatus : Exception;
-    class NoValidDrones : Exception;//delete
     class EmptyJsonFile : Exception
     {
         public EmptyJsonFile(string message)
@@ -21,14 +20,8 @@ namespace drones
 
     public class MalformedJsonException : Exception
     {
-        public MalformedJsonException(string message, Exception innerException)
-            : base(message,innerException) { }
-    }
-
-    public class JsonTypeMismatchException : Exception //delete
-    {
-        public JsonTypeMismatchException(string message, Exception innerException)
-            : base(message, innerException) { }
+        public MalformedJsonException(string message)
+            : base(message) { }
     }
 
     public class drones_empty : Exception

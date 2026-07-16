@@ -1,10 +1,13 @@
-﻿using System;
+﻿using drones;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DroneFleetDataProcessing.src.ProcessData
 {
-    internal class Iloaddata
+    interface Iloaddata
     {
+        public List<Drone>? InitialProcess(string data);
+        
     }
 }

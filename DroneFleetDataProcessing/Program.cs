@@ -10,22 +10,19 @@ namespace drones
             Console.WriteLine("=== Drone Fleet Data Processing System ===");
             Console.WriteLine("Step 1: Reading raw data...");
             Console.WriteLine("Reading records from raw file");
-            Process f = new Process();
-            List<Drone>? allDrones = f.InitialProcess("drones_raw.json");
-            if (allDrones == null)
-            {
-                Console.WriteLine("Failed to read file.");
-                return;
-            }
+            ProcessJsonFile process = new ProcessJsonFile();
+            List<Drone>? allDrones = process.InitialProcess("drones_raw.json");
+            
+            if (allDrones == null) return;
+            
             Console.WriteLine("Step 2: Validating data and creating clean dataset...");
-            List<Drone>? validDrone = f.FilterDrones(allDrones);
-            if (validDrone == null)
-            {
-                Console.WriteLine("No valid drones in file.");
-                return;
-            }
-            Console.WriteLine($"Valid records: {validDrone.Count}");
-            Console.WriteLine($"Rejected records: {allDrones.Count - validDrone.Count}");
+            List<Drone> validDrones = process.FilterDrones(allDrones);
+            
+            
+            if (! process.isAllDronesInvalid(validDrones)) return;
+            
+            Console.WriteLine($"Valid records: {validDrones.Count}");
+            Console.WriteLine($"Rejected records: {allDrones.Count - validDrones.Count}");
             Console.WriteLine("Step 3: Saving clean data...");
             CreateFiles cr = new();
             List<string> paths = cr.Create();
@@ -33,7 +30,7 @@ namespace drones
             Console.WriteLine("Step 4: Reloading clean data...");
             Console.WriteLine("Loaded records from clean dataset");
             Console.WriteLine("Step 5: Performing analysis...");
-            AllData reporter = new(paths[1], paths[0], allDrones, validDrone);
+            AllData reporter = new(paths[1], paths[0], allDrones, validDrones);
             Console.WriteLine("Analysis completed successfully");
             Console.WriteLine("Step 6: Generating report...");
             reporter.GetReport();

@@ -1,4 +1,5 @@
-﻿using drones;
+﻿using DroneFleetDataProcessing.src.ProcessData;
+using drones;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters;
@@ -9,14 +10,14 @@ using System.Xml;
 
 namespace drones
 {
-    class Process
+    class ProcessJsonFile : Iloaddata 
     {
-         public List<Drone>? InitialProcess(string fileName)
+         public List<Drone>? InitialProcess(string data)
         {
             try
             {             
                 
-                string folderPath = Path.Combine("input", "raw", fileName);
+                string folderPath = Path.Combine("input", "raw", data);
                 string loadJson = File.ReadAllText(folderPath);
                 
                 var options = new JsonSerializerOptions
@@ -84,9 +85,8 @@ namespace drones
                 bool isValidReport = valdator.Validate(drone);
                 if (isValidReport && !(ides.Contains(drone.id)) && !(serials.Contains(drone.serialNumber))) { validDrones.Add(drone); ides.Add(drone.id); serials.Add(drone.serialNumber); }
             }
-            
-           
-                Console.WriteLine(validDrones.Count);
+        
+                
             return validDrones;
         }
 
